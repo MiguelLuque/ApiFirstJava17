@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: API de Productos
+  description: Esta API permite realizar operaciones CRUD sobre una entidad de productos.
+  version: "1.0"
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /productos:
+    get:
+      summary: Lista todos los productos
+      operationId: listProductos
+      responses:
+        '200':
+          description: Una lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+    post:
+      summary: Crea un nuevo producto
+      operationId: addProducto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producto'
+      responses:
+        '201':
+          description: Producto creado
+  /productos/{id}:
+    get:
+      summary: Obtiene un producto por ID
+      operationId: getProductoById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalle del producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+    put:
+      summary: Actualiza un producto existente
+      operationId: updateProducto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producto'
+      responses:
+        '200':
+          description: Producto actualizado
+    delete:
+      summary: Elimina un producto
+      operationId: deleteProducto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Producto eliminado
+components:
+  schemas:
+    Producto:
+      type: object
+      required:
+        - id
+        - nombre
+        - descripcion
+        - precio
+      properties:
+        id:
+          type: string
+          description: Identificador único del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+        precio:
+          type: number
+          format: double
+          description: Precio del producto
