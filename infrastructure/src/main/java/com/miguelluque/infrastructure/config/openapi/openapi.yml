@@ -18,7 +18,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Producto'
+                  $ref: '#/components/schemas/ProductoDto'
     post:
       summary: Crea un nuevo producto
       operationId: addProducto
@@ -27,7 +27,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Producto'
+              $ref: '#/components/schemas/ProductoDto'
       responses:
         '201':
           description: Producto creado
@@ -47,7 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Producto'
+                $ref: '#/components/schemas/ProductoDto'
     put:
       summary: Actualiza un producto existente
       operationId: updateProducto
@@ -62,7 +62,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Producto'
+              $ref: '#/components/schemas/ProductoDto'
       responses:
         '200':
           description: Producto actualizado
@@ -80,7 +80,7 @@ paths:
           description: Producto eliminado
 components:
   schemas:
-    Producto:
+    ProductoDto:
       type: object
       required:
         - id

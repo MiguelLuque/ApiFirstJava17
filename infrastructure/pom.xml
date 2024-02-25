@@ -25,16 +25,16 @@
     </properties>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>com.miguelluque</groupId>-->
-        <!--            <artifactId>domain</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.miguelluque</groupId>-->
-        <!--            <artifactId>application</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.miguelluque</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miguelluque</groupId>
+            <artifactId>application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- Used to document api-->
         <dependency>
@@ -112,7 +112,8 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/java/com/miguelluque/config/openapi/openapi.yml
+                            <inputSpec>
+                                ${project.basedir}/src/main/java/com/miguelluque/infrastructure/config/openapi/openapi.yml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>com.miguelluque.infrastructure.api</apiPackage>
