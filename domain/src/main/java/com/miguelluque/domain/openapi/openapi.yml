@@ -1,0 +1,325 @@
+openapi: 3.0.0
+info:
+  title: API de Productos
+  description: Esta API permite realizar operaciones CRUD sobre una entidad de productos
+  version: "1.0"
+servers:
+  - url: 'http://localhost:8080'
+tags:
+  - name: productos
+    description: Operaciones con productos
+  - name: auth
+    description: Operaciones de autenticación
+paths:
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: autentica un usuario
+      description: genera un JWT
+      operationId: login
+      requestBody:
+        description: Recupera el token para el usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+        required: true
+      responses:
+        200:
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        401:
+          description: Autenticación fallida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /auth/registration:
+    post:
+      tags:
+        - auth
+      summary: Crea un nuevo usuario
+      description: genera un JWT
+      operationId: registration
+      requestBody:
+        description: Registra un nuevo usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /productos:
+    get:
+      tags:
+        - productos
+      summary: Lista todos los productos
+      operationId: getProductList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Número de página que se desea consultar
+        - in: query
+          name: size
+          schema:
+            type: integer
+            default: 10
+          description: Número de productos a listar por página
+      responses:
+        200:
+          description: Una lista de productos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductResponse'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    post:
+      tags:
+        - productos
+      summary: Crea un nuevo producto
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoDto'
+      responses:
+        201:
+          description: Producto creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductoDto'
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /productos/{id}:
+    get:
+      tags:
+        - productos
+      summary: Obtiene un producto por ID
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Detalle del producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductoDto'
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        404:
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    put:
+      tags:
+        - productos
+      summary: Actualiza un producto existente
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoDto'
+      responses:
+        200:
+          description: Detalle del producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductoDto'
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        404:
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    delete:
+      tags:
+        - productos
+      summary: Elimina un producto
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        204:
+          description: Producto eliminado
+        400:
+          description: Petición invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        404:
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+components:
+  schemas:
+
+    PaginatedProductResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          description: Número total de páginas, basado en el tamaño de página.
+        currentPage:
+          type: integer
+          description: Número de la página actual que se está mostrando.
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductoDto'
+          description: Lista de productos en la página actual.
+    AuthRequest:
+      type: object
+      required:
+        - password
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        password:
+          type: string
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+
+    AuthResponse:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        token:
+          type: string
+
+    ErrorDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          example: PET_NOT_FOUND
+        error:
+          type: string
+          example: The announcement was not found
+    ProductoDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Identificador único del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+        precio:
+          type: number
+          format: double
+          description: Precio del producto

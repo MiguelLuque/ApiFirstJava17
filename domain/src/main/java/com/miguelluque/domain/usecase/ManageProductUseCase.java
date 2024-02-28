@@ -1,20 +1,20 @@
 package com.miguelluque.domain.usecase;
 
-import com.miguelluque.domain.entity.Producto;
-
-import java.util.List;
-import java.util.Optional;
+import com.miguelluque.domain.dto.PaginatedProductResponse;
+import com.miguelluque.domain.dto.ProductoDto;
 
 public interface ManageProductUseCase {
-    Producto createProduct(Producto producto);
 
-    Optional<Producto> getProductById(Long id);
+    //TODO:
+    PaginatedProductResponse getProductsByFilter();
 
-    List<Producto> getAllProducts();
+    PaginatedProductResponse getProductList(Integer page, Integer size);
 
-    List<Producto> getProductsByFilter();
+    ProductoDto getProductById(Long id);
 
-    Producto updateProduct(Long id, Producto producto);
+    ProductoDto createProduct(ProductoDto producto);
+
+    ProductoDto updateProduct(Long id, ProductoDto productoDto);
 
     void deleteProduct(Long id);
 }

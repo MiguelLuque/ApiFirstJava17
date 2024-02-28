@@ -3,7 +3,6 @@ package com.miguelluque.domain.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import org.springframework.data.annotation.Id;
 @Builder // Para utilizar el patrón de diseño Builder
 @Getter
 @Setter
-@AllArgsConstructor
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
