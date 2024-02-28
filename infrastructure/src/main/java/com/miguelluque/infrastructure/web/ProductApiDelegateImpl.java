@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+@RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductApiDelegateImpl implements ProductosApiDelegate {
 
@@ -28,7 +28,7 @@ public class ProductApiDelegateImpl implements ProductosApiDelegate {
 
     @Override
     public ResponseEntity<ProductoDto> createProduct(ProductoDto productoDto) {
-        return new ResponseEntity<>(manageProductUseCase.createProduct(productoDto), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(manageProductUseCase.createProduct(productoDto), HttpStatus.CREATED);
     }
 
     @Override

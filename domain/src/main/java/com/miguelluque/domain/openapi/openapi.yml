@@ -302,10 +302,10 @@ components:
       properties:
         code:
           type: string
-          example: PET_NOT_FOUND
+          example: 404
         error:
           type: string
-          example: The announcement was not found
+          example: Product not found
     ProductoDto:
       type: object
       properties:

@@ -1,15 +1,29 @@
 package com.miguelluque.application.mapper;
 
+import com.miguelluque.domain.dto.PaginatedProductResponse;
 import com.miguelluque.domain.dto.ProductoDto;
 import com.miguelluque.domain.entity.Producto;
+import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
-//@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-//    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    Producto dtoToProduct(ProductoDto productDto);
+    Producto toEntity(ProductoDto productDto);
 
-    ProductoDto productToDto(Producto product);
+    ProductoDto toDto(Producto product);
+
+    List<ProductoDto> toDto(List<Producto> target);
+
+    default PaginatedProductResponse toPaginatedResponse(Page<Producto> src, Integer page) {
+        PaginatedProductResponse res = new PaginatedProductResponse();
+        res.setProducts(this.toDto(src.getContent()));
+        res.setCurrentPage(page);
+        res.setTotalPages(src.getTotalPages());
+        return res;
+    }
 }
 
