@@ -91,11 +91,11 @@
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/src/main/java/com/miguelluque/domain/openapi/openapi.yml
+                                ${project.basedir}/src/main/java/com/miguelluque/apifirst/openapi/openapi.yml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.miguelluque.domain.api</apiPackage>
-                            <modelPackage>com.miguelluque.domain.dto</modelPackage>
+                            <apiPackage>com.miguelluque.apifirst.api</apiPackage>
+                            <modelPackage>com.miguelluque.apifirst.dto</modelPackage>
                             <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                             <configOptions>
                                 <!--                                <interfaceOnly>true</interfaceOnly>-->
