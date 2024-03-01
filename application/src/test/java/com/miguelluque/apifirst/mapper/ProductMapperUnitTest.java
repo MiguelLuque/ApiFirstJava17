@@ -3,10 +3,12 @@ package com.miguelluque.apifirst.mapper;
 import com.miguelluque.apifirst.dto.PaginatedProductResponse;
 import com.miguelluque.apifirst.dto.ProductoDto;
 import com.miguelluque.apifirst.entity.Producto;
+import com.miguelluque.apifirst.tax.CalculadorDeImpuestos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +23,10 @@ public class ProductMapperUnitTest {
 
 
     private ProductMapper productMapper;
+
+    @Mock
+    private CalculadorDeImpuestos calculadorDeImpuestos;
+    ;
 
     @BeforeEach
     void setup() {

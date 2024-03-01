@@ -351,3 +351,16 @@ components:
           description: Precio del producto
           minimum: 0
           example: 999.99
+        impuesto:
+          type: number
+          format: double
+          description: Precio del producto
+          minimum: 0
+          example: 999.99
+        precioConImpuesto:
+          type: number
+          format: double
+          description: Precio del producto
+          minimum: 0
+          example: 999.99
+
