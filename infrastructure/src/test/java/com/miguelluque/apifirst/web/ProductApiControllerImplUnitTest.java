@@ -16,13 +16,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductApiDelegateImplUnitTest {
+public class ProductApiControllerImplUnitTest {
 
     @Mock
     private ManageProductUseCase manageProductUseCase;
 
     @InjectMocks
-    private ProductApiDelegateImpl productApiDelegateImpl;
+    private ProductApiControllerImpl productApiControllerImpl;
 
 
     @Test
@@ -32,7 +32,7 @@ public class ProductApiDelegateImplUnitTest {
 
         when(manageProductUseCase.createProduct(any(ProductoCreateDto.class))).thenReturn(mockProductoDto);
 
-        ResponseEntity<ProductoDto> response = productApiDelegateImpl.createProduct(new ProductoCreateDto());
+        ResponseEntity<ProductoDto> response = productApiControllerImpl.createProduct(new ProductoCreateDto());
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }

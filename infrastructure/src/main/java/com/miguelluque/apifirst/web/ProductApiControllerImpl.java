@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ProductApiDelegateImpl implements ProductosApi {
+public class ProductApiControllerImpl implements ProductosApi {
 
     private final ManageProductUseCase manageProductUseCase;
 
