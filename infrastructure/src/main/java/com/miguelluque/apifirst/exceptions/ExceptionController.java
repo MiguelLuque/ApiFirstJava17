@@ -28,8 +28,8 @@ public class ExceptionController {
      * @param e the e
      * @return the response entity
      */
-    @ExceptionHandler(value = Throwable.class)
-    public ResponseEntity<ErrorDTO> genericException(Throwable e) {
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorDTO> genericException(Exception e) {
 
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
@@ -53,7 +53,7 @@ public class ExceptionController {
 
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setCode(HttpStatus.NOT_FOUND.toString());
-        errorDTO.setError("Element not found");
+        errorDTO.setError(e.getMessage());
 
         return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
 

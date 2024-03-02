@@ -98,9 +98,9 @@
                             <modelPackage>com.miguelluque.apifirst.dto</modelPackage>
                             <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                             <configOptions>
-                                <!--                                <interfaceOnly>true</interfaceOnly>-->
-                                <delegatePattern>true</delegatePattern>
-                                <!--                                <useTags>true</useTags>-->
+                                <interfaceOnly>true</interfaceOnly>
+                                <useTags>true</useTags>
+                                <!--                                <delegatePattern>true</delegatePattern>-->
                             </configOptions>
                         </configuration>
                     </execution>

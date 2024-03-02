@@ -17,7 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -54,10 +53,9 @@ public class ManageProductoService implements ManageProductUseCase {
     }
 
     @Override
-    public ProductoDto updateProduct(Long id, ProductoDto producto) {
-        if (!checkIfExists(id).isPresent()) {
-            throw new IllegalArgumentException("Product not found");
-        }
+    public ProductoDto updateProduct(Long id, ProductoCreateDto producto) {
+        //check if exist, if not, throw an error
+        this.getProductById(id);
         Producto productEntity = productMapper.toEntity(producto);
         productEntity.setId(id);
 
@@ -66,14 +64,8 @@ public class ManageProductoService implements ManageProductUseCase {
 
     @Override
     public void deleteProduct(Long id) {
+        this.getProductById(id);
         productRepository.deleteById(id);
-    }
-
-    private Optional<Producto> checkIfExists(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Id must not be null");
-        }
-        return productRepository.findById(id);
     }
 }
 

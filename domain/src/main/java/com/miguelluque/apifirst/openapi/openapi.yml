@@ -197,7 +197,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductoDto'
+              $ref: '#/components/schemas/ProductoCreateDto'
       responses:
         200:
           description: Detalle del producto

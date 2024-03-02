@@ -1,6 +1,6 @@
 package com.miguelluque.apifirst.web;
 
-import com.miguelluque.apifirst.api.ProductosApiDelegate;
+import com.miguelluque.apifirst.api.ProductosApi;
 import com.miguelluque.apifirst.dto.PaginatedProductResponse;
 import com.miguelluque.apifirst.dto.ProductoCreateDto;
 import com.miguelluque.apifirst.dto.ProductoDto;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ProductApiDelegateImpl implements ProductosApiDelegate {
+public class ProductApiDelegateImpl implements ProductosApi {
 
     private final ManageProductUseCase manageProductUseCase;
 
@@ -34,7 +34,7 @@ public class ProductApiDelegateImpl implements ProductosApiDelegate {
     }
 
     @Override
-    public ResponseEntity<ProductoDto> updateProduct(Long id, ProductoDto productoDto) {
+    public ResponseEntity<ProductoDto> updateProduct(Long id, ProductoCreateDto productoDto) {
         return ResponseEntity.ok(manageProductUseCase.updateProduct(id, productoDto));
     }
 

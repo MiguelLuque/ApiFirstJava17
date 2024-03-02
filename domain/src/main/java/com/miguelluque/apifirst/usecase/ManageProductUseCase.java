@@ -15,7 +15,7 @@ public interface ManageProductUseCase {
 
     ProductoDto createProduct(ProductoCreateDto producto);
 
-    ProductoDto updateProduct(Long id, ProductoDto productoDto);
+    ProductoDto updateProduct(Long id, ProductoCreateDto productoDto);
 
     void deleteProduct(Long id);
 }
