@@ -19,6 +19,11 @@ public class ProductApiControllerImpl implements ProductosApi {
 
 
     @Override
+    public ResponseEntity<PaginatedProductResponse> searchProductos(String nombre, String descripcion, Double precioMin, Double precioMax, Integer page, Integer size) {
+        return ResponseEntity.ok(manageProductUseCase.getProductsByFilter(nombre, descripcion, precioMin, precioMax, page, size));
+    }
+
+    @Override
     public ResponseEntity<PaginatedProductResponse> getProductList(Integer page, Integer size) {
         return ResponseEntity.ok(manageProductUseCase.getProductList(page, size));
     }

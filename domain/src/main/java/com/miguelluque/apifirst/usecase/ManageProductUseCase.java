@@ -6,8 +6,7 @@ import com.miguelluque.apifirst.dto.ProductoDto;
 
 public interface ManageProductUseCase {
 
-    //TODO:
-    PaginatedProductResponse getProductsByFilter();
+    PaginatedProductResponse getProductsByFilter(String nombre, String descripcion, Double precioMin, Double precioMax, Integer page, Integer size);
 
     PaginatedProductResponse getProductList(Integer page, Integer size);
 

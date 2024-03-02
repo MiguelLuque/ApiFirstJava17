@@ -7,6 +7,7 @@ import com.miguelluque.apifirst.dto.ProductoDto;
 import com.miguelluque.apifirst.entity.Producto;
 import com.miguelluque.apifirst.mapper.ProductMapper;
 import com.miguelluque.apifirst.repository.ProductRepository;
+import com.miguelluque.apifirst.specification.ProductoSpecifications;
 import com.miguelluque.apifirst.usecase.ManageProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,19 @@ public class ManageProductoService implements ManageProductUseCase {
     }
 
     @Override
-    public PaginatedProductResponse getProductsByFilter() {
-        return null;
+    public PaginatedProductResponse getProductsByFilter(String nombre, String descripcion, Double precioMin, Double precioMax, Integer page, Integer size) {
+
+        if (precioMin != null && precioMax != null && precioMin > precioMax) {
+            throw new IllegalArgumentException("El precio máximo no puede ser inferior al mínimo");
+        }
+
+        PageRequest pageParams = PageRequest.of(page, size);
+        Page<Producto> res = productRepository.findAll(
+                ProductoSpecifications.byFilter(nombre, descripcion, precioMin, precioMax),
+                pageParams
+        );
+        return productMapper.toPaginatedResponse(res, page);
+
     }
 
     @Override
