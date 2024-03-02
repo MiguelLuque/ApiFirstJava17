@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
@@ -29,6 +30,7 @@ public class ManageProductoService implements ManageProductUseCase {
 
 
     @Override
+    @Transactional(readOnly = true)
     public PaginatedProductResponse getProductList(Integer page, Integer size) {
 
         Pageable pageParams = PageRequest.of(page, size, Sort.by("nombre").ascending());
@@ -39,6 +41,7 @@ public class ManageProductoService implements ManageProductUseCase {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PaginatedProductResponse getProductsByFilter(String nombre, String descripcion, Double precioMin, Double precioMax, Integer page, Integer size) {
 
         if (precioMin != null && precioMax != null && precioMin > precioMax) {
@@ -55,16 +58,19 @@ public class ManageProductoService implements ManageProductUseCase {
     }
 
     @Override
+    @Transactional
     public ProductoDto createProduct(ProductoCreateDto producto) {
         return productMapper.toDto(productRepository.save(productMapper.toEntity(producto)));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProductoDto getProductById(Long id) {
         return productRepository.findById(id).map(productMapper::toDto).orElseThrow(() -> new NoSuchElementException("Product not found"));
     }
 
     @Override
+    @Transactional
     public ProductoDto updateProduct(Long id, ProductoCreateDto producto) {
         //check if exist, if not, throw an error
         this.getProductById(id);
@@ -75,7 +81,9 @@ public class ManageProductoService implements ManageProductUseCase {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Long id) {
+        //check if exist, if not, throw an error
         this.getProductById(id);
         productRepository.deleteById(id);
     }

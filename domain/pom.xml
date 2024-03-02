@@ -14,6 +14,12 @@
     <name>domain</name>
 
     <dependencies>
+        <!--  Security      -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
         <!-- Used to document api-->
         <dependency>
             <groupId>org.springdoc</groupId>

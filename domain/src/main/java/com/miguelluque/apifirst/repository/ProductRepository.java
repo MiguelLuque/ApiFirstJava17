@@ -1,10 +1,21 @@
 package com.miguelluque.apifirst.repository;
 
 import com.miguelluque.apifirst.entity.Producto;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Producto, Long>, JpaSpecificationExecutor<Producto> {
+import java.util.Optional;
+
+public interface ProductRepository {
+    Page<Producto> findAll(Specification<Producto> productoSpecification, PageRequest pageParams);
+
+    Page<Producto> findAll(Pageable pageParams);
+
+    Producto save(Producto entity);
+
+    Optional<Producto> findById(Long id);
+
+    void deleteById(Long id);
 }

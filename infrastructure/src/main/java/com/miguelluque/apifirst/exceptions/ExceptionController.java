@@ -94,7 +94,7 @@ public class ExceptionController {
 
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setCode(HttpStatus.UNAUTHORIZED.toString());
-        errorDTO.setError("Invalid credentials");
+        errorDTO.setError("Credenciales no válidas");
 
         return new ResponseEntity<>(errorDTO, HttpStatus.UNAUTHORIZED);
 
@@ -112,10 +112,10 @@ public class ExceptionController {
     public ResponseEntity<ErrorDTO> accessDeniedException(AccessDeniedException e) {
 
         ErrorDTO errorDTO = new ErrorDTO();
-        errorDTO.setCode(HttpStatus.UNAUTHORIZED.toString());
-        errorDTO.setError("Access denied");
+        errorDTO.setCode(HttpStatus.BAD_REQUEST.toString());
+        errorDTO.setError("Acceso denegado");
 
-        return new ResponseEntity<>(errorDTO, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
 
     }
 
