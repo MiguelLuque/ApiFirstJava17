@@ -18,9 +18,12 @@ El módulo `domain` está organizado en varias carpetas clave, cada una con un p
 
 - **Ubicación:** `entity/`
 - **Descripción:** Contiene las entidades de dominio de la aplicación. En este módulo, definimos la entidad `Producto`,
-  que representa la información clave de los productos gestionados por la aplicación.
+  que representa la información clave de los productos gestionados por la aplicación, así como `User` y `Role`
+  como entidades necesarias para la gestión de la autorización
 
 ### Repository
+
+Los repositorios situados en esta capa sirven como un contrato, su implementación se encuentra en infrastructure
 
 - **Ubicación:** `repository/`
 - **Descripción:** Define los repositorios utilizados para acceder y manipular datos de las entidades de dominio. Por
@@ -31,7 +34,15 @@ El módulo `domain` está organizado en varias carpetas clave, cada una con un p
 - **Ubicación:** `usecase/`
 - **Descripción:** Contiene los casos de uso que encapsulan la lógica de negocio específica de la
   aplicación. `ManageProductUseCase` es responsable de orquestar las operaciones de negocio relacionadas con los
-  productos, como crear, actualizar, borrar y listar productos.
+  productos, como crear, actualizar, borrar y listar productos.`ManageAuthUseCase` es responsable de orquestar las
+  operaciones de negocio relacionadas con
+  la autorización de usuarios.
+
+### Tax
+
+- **Ubicación:** `tax/`
+- **Descripción:** Contiene la interfaz `CalculadorDeImpuestos` y las clases `CalculadorDeImpuestosIVA`
+  y `CalculadorDeImpuestosITBIS` que la implementan
 
 ## Responsabilidades Clave
 

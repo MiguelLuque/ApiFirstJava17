@@ -8,11 +8,15 @@ la persistencia, seguridad, y la integración con otros servicios y sistemas.
 
 El módulo `infrastructure` está organizado en varias carpetas clave, reflejando sus responsabilidades principales:
 
-### Configuración
+### Web
 
-- **Ubicación:** `config/`
-- **Descripción:** Contiene clases de configuración de Spring y otros frameworks utilizados en la aplicación. Esto puede
-  incluir configuraciones de seguridad, JPA, y configuraciones específicas del servicio.
+- **Ubicación:** `web/`
+- **Descripción:** Contiene la implementación de los controladores generados por openapi con la definición provista en domain.
+
+### Exceptions
+
+- **Ubicación:** `exceptions/`
+- **Descripción:** Contiene el controlador encargado de la gestión de errores.
 
 ### Persistencia
 
@@ -22,7 +26,7 @@ El módulo `infrastructure` está organizado en varias carpetas clave, reflejand
 
 ### Seguridad
 
-- **Ubicación:** `security/`
+- **Ubicación:** `config/security/`
 - **Descripción:** Define la configuración de seguridad de la aplicación, incluyendo la autenticación, autorización, y
   otras políticas de seguridad relevantes.
 

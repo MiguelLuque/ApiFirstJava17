@@ -24,6 +24,9 @@ El módulo `application` está organizado en subcarpetas que reflejan sus respon
   aplicación específica y las reglas de negocio.
 - **Componente Clave:** `ManageProductoService` implementa la interfaz `ManageProductUseCase`, proporcionando la lógica
   de negocio para operaciones CRUD sobre productos.
+- **Gestion de autorización:** `ManageAuthService` implementa la interfaz `ManageAuthtUseCase`, proporcionando la lógica
+  para la autorización de usuarios.
+- **Gestion de tokens:** `JwtTokenService` este componente ayuda a la gestión de los token JWT.
 
 ## Responsabilidades Clave
 
@@ -35,6 +38,8 @@ El módulo `application` se encarga de:
   de dominio para acceder y modificar datos, y aplicando cualquier lógica de negocio adicional requerida.
 - **Abstracción de la Capa de Dominio:** Proporcionar una interfaz clara para las operaciones de negocio que puede ser
   utilizada por la capa de presentación o API, sin exponer los detalles de implementación de la capa de dominio.
+- **Especificación:** es la clase que contiene la lógica que se seguirá en la query dinamica que se crea. Este elemento
+  está en este módulo por comodidad.
 
 ## MapStruct para Mapeo de Objetos
 
