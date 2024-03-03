@@ -37,7 +37,6 @@ public class ManageAuthService implements ManageAuthUseCase {
 
         Optional<User> user = userRepository.findByEmail(email);
 
-        // Converting userDetail to UserDetails
         return user
                 .orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
     }
@@ -77,6 +76,7 @@ public class ManageAuthService implements ManageAuthUseCase {
         return this.login(userEntity);
     }
 
+    //esto podría ir en otro repositorio
     @Override
     public Role findRoleByName(String name) {
         return roleRepository.findByName(name).orElseThrow(() -> new NoSuchElementException("Role not found"));

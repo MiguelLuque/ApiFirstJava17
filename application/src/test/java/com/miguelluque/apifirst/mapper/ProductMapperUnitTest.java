@@ -3,31 +3,31 @@ package com.miguelluque.apifirst.mapper;
 import com.miguelluque.apifirst.dto.PaginatedProductResponse;
 import com.miguelluque.apifirst.dto.ProductoDto;
 import com.miguelluque.apifirst.entity.Producto;
+import com.miguelluque.apifirst.tax.CalculadorDeImpuestosIVA;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class ProductMapperUnitTest {
 
 
-//    @Mock
-//    protected CalculadorDeImpuestos calculadorDeImpuestos;
-
-    @InjectMocks
-    private ProductMapperImpl productMapper;
+    private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
 
     @BeforeEach
     void setup() {
-//        productMapper = Mappers.getMapper(ProductMapper.class);
+        ReflectionTestUtils.setField(this.productMapper, "calculadorDeImpuestos", new CalculadorDeImpuestosIVA());
     }
 
 
@@ -46,6 +46,8 @@ public class ProductMapperUnitTest {
         assertEquals(product.getNombre(), productDto.getNombre());
         assertEquals(product.getDescripcion(), productDto.getDescripcion());
         assertEquals(product.getPrecio(), productDto.getPrecio());
+        assertEquals(product.getPrecio() * 1.21, productDto.getPrecioConImpuesto());
+        assertEquals(product.getPrecio() * 0.21, productDto.getImpuesto());
     }
 
     @Test
